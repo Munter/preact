@@ -735,6 +735,7 @@ export namespace JSXInternal {
 			| SignalLike<
 					'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send'
 			  >;
+		for?: string | SignalLike<string>;
 		form?: string | SignalLike<string>;
 		formAction?: string | SignalLike<string>;
 		formEncType?: string | SignalLike<string>;
@@ -748,11 +749,11 @@ export namespace JSXInternal {
 		high?: number | SignalLike<number>;
 		href?: string | SignalLike<string>;
 		hrefLang?: string | SignalLike<string>;
-		for?: string | SignalLike<string>;
 		htmlFor?: string | SignalLike<string>;
 		httpEquiv?: string | SignalLike<string>;
 		icon?: string | SignalLike<string>;
 		id?: string | SignalLike<string>;
+		indeterminate?: boolean | SignalLike<boolean>;
 		inputMode?: string | SignalLike<string>;
 		integrity?: string | SignalLike<string>;
 		is?: string | SignalLike<string>;
