@@ -35,7 +35,7 @@ export function diffProps(dom, newProps, oldProps, isSvg, hydrate) {
 
 function setStyle(style, key, value) {
 	if (key[0] === '-') {
-		style.setProperty(key, value);
+		style.setProperty(key, value == null ? '' : value);
 	} else if (value == null) {
 		style[key] = '';
 	} else if (typeof value != 'number' || IS_NON_DIMENSIONAL.test(key)) {
@@ -141,15 +141,29 @@ export function setProperty(dom, name, value, oldValue, isSvg) {
 	}
 }
 
+export let inEvent = false;
+
 /**
  * Proxy an event to hooked event handlers
  * @param {Event} e The event object from the browser
  * @private
  */
 function eventProxy(e) {
-	return this._listeners[e.type + false](options.event ? options.event(e) : e);
+	inEvent = true;
+	try {
+		return this._listeners[e.type + false](
+			options.event ? options.event(e) : e
+		);
+	} finally {
+		inEvent = false;
+	}
 }
 
 function eventProxyCapture(e) {
-	return this._listeners[e.type + true](options.event ? options.event(e) : e);
+	inEvent = true;
+	try {
+		return this._listeners[e.type + true](options.event ? options.event(e) : e);
+	} finally {
+		inEvent = false;
+	}
 }
